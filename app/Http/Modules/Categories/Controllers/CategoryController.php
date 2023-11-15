@@ -23,14 +23,14 @@ class CategoryController extends Controller
     {
         try {
             return response()->json([
+                'message' => 'ok',
                 'data' => $this->categoryRepository->list(),
-                'message' => 'ok'
             ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return response()->json([
+                'message' => 'Error al obtener los datos ', $th->getMessage(),
                 'data' => null,
-                'message' => 'Error al obtener los datos ', $th->getMessage()
             ], 400);
         }
     }
@@ -41,16 +41,15 @@ class CategoryController extends Controller
     public function store(CreateOrUpdateCategoryRequest $request)
     {
         try {
-
             return response()->json([
+                'message' => 'Categoria creada correctamente',
                 'data' =>  $this->categoryRepository->save(new Category($request->all())),
-                'message' => 'Categoria creada correctamente'
             ], 201);
         } catch (\Throwable $e) {
 
             return response()->json([
+                'message' => 'Error al crear la categoria ' . $e->getMessage(),
                 'data' =>  null,
-                'message' => 'Error al crear la categoria ' .  $e
             ], 400);
         }
     }
@@ -64,20 +63,20 @@ class CategoryController extends Controller
             $category = $this->categoryRepository->getById($id);
             if (!$category)
                 return response()->json([
+                    'message' => 'La categoria no existe',
                     'data' => null,
-                    'message' => 'La categoria no existe'
                 ], 404);
 
             return response()->json([
+                'message' => 'ok',
                 'data' => $category,
-                'message' => 'ok'
             ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             // return [$th->getMessage(), $th->getFile()];
             return response()->json([
+                'message' => 'Error al obtener los datos ', $th->getMessage(),
                 'data' => null,
-                'message' => 'Error al obtener los datos ', $th->getMessage()
             ], 400);
         }
     }
@@ -91,22 +90,20 @@ class CategoryController extends Controller
             $category = $this->categoryRepository->find($id);
             if (!$category)
                 return response()->json([
+                    'message' => 'La categoria no existe',
                     'data' => null,
-                    'message' => 'La categoria no existe'
                 ], 404);
 
             return response()->json([
+                'message' => 'Categoria actualizada con exito',
                 'data' => $this->categoryRepository->save($category->fill($request->all())),
-                'message' => 'Categoria actualizada con exito'
             ], 200);
-
-
 
         } catch (\Throwable $e) {
 
             return response()->json([
+                'message' => 'Error al actualizar: ', $e->getMessage(),
                 'data' => null,
-                'message' => 'Error al actualizar', $e->getMessage()
             ], 400);
 
         }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Modules\Categories\Models;
 
-use App\Models\Product;
+use App\Http\Modules\Products\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

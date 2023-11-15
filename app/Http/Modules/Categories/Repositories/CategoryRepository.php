@@ -34,8 +34,8 @@ class CategoryRepository extends RepositoryBase
     public function getById(int $id): ?Category
     {
         return $this->categoryModel->select('id', 'name', 'created_at')
-            ->with([
-                'products' => fn ($query) =>  $query->select('id', 'name', 'category_id', 'mark_id')->with(['mark:id,name'])
+            ->with(['products' => fn ($query) =>  $query->select('id', 'name', 'category_id', 'mark_id')
+                ->with(['mark:id,name'])
             ])->where('id', $id)->first();
     }
 }
