@@ -20,7 +20,7 @@ class ProductRepository extends  RepositoryBase
      */
     public function list(): object
     {
-        return $this->productModel->select('name', 'price', 'category_id', 'mark_id')
+        return $this->productModel->select('id', 'name', 'price', 'category_id', 'mark_id')
             ->with([
                 'category:id,name',
                 'mark:id,name',
