@@ -3,6 +3,8 @@
 namespace App\Http\Modules\Marks\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreateOrUpdateMarkRequest extends FormRequest
 {
@@ -24,5 +26,24 @@ class CreateOrUpdateMarkRequest extends FormRequest
         return [
             'name' => 'required|string|min:3'
         ];
+    }
+
+    /**
+     *
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'El nombre de la marca es requerido',
+            'name.string' => 'El nombre debe ser una cadena de texto',
+        ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json($validator->errors(), 400));
     }
 }

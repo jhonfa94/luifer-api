@@ -20,7 +20,12 @@ class MarkRepository extends RepositoryBase
      */
     public function list(): object
     {
-        return $this->markModel->select('id', 'name', 'created_at')->get();
+        return $this->markModel->select('id', 'name', 'created_at')
+        ->with([
+            "products" => fn ($query) => $query->select('id', 'name', 'price', 'mark_id', 'category_id')
+            ->with(['category:id,name'])
+        ])
+            ->get();
     }
 
     /**

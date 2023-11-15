@@ -28,6 +28,14 @@ class CreateOrUpdateCategoryRequest extends FormRequest
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'El nombre de la categoría es requerido',
+            'name.string' => 'El nombre de al categoría debe ser una cadena de texto',
+        ];
+    }
+
 
     protected function failedValidation(Validator $validator)
     {

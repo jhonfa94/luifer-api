@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Modules\Categories\Models\Category;
 use App\Http\Modules\Categories\Repositories\CategoryRepository;
 use App\Http\Modules\Categories\Requests\CreateOrUpdateCategoryRequest;
+use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
@@ -17,9 +18,11 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Get List Categories
+     *
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         try {
             return response()->json([
@@ -36,9 +39,12 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store Category
+     *
+     * @param CreateOrUpdateCategoryRequest $request
+     * @return JsonResponse
      */
-    public function store(CreateOrUpdateCategoryRequest $request)
+    public function store(CreateOrUpdateCategoryRequest $request): JsonResponse
     {
         try {
             return response()->json([
@@ -55,9 +61,12 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show Category By Id
+     *
+     * @param integer $id
+     * @return JsonResponse
      */
-    public function show(int $id)
+    public function show(int $id): JsonResponse
     {
         try {
             $category = $this->categoryRepository->getById($id);
@@ -82,9 +91,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update Category By Id
+     *
+     * @param CreateOrUpdateCategoryRequest $request
+     * @param integer $id
+     * @return JsonResponse
      */
-    public function update(CreateOrUpdateCategoryRequest $request, int $id)
+    public function update(CreateOrUpdateCategoryRequest $request, int $id): JsonResponse
     {
         try {
             $category = $this->categoryRepository->find($id);
@@ -109,11 +122,5 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Category $category)
-    {
-        //
-    }
+
 }

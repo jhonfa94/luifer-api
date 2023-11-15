@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Modules\Marks\Models\Mark;
 use App\Http\Modules\Marks\Repositories\MarkRepository;
 use App\Http\Modules\Marks\Requests\CreateOrUpdateMarkRequest;
+use Illuminate\Http\JsonResponse;
 
 class MarkController extends Controller
 {
@@ -17,9 +18,11 @@ class MarkController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * Get list Marks
+     *
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         try {
             return response()->json([
@@ -35,9 +38,12 @@ class MarkController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store Mark
+     *
+     * @param CreateOrUpdateMarkRequest $request
+     * @return JsonResponse
      */
-    public function store(CreateOrUpdateMarkRequest $request)
+    public function store(CreateOrUpdateMarkRequest $request): JsonResponse
     {
         try {
             return response()->json([
@@ -53,9 +59,12 @@ class MarkController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show Mark By Id
+     *
+     * @param integer $id
+     * @return JsonResponse
      */
-    public function show(int $id)
+    public function show(int $id): JsonResponse
     {
         try {
             $mark = $this->markRepository->getById($id);
@@ -78,9 +87,13 @@ class MarkController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update Mark By Id
+     *
+     * @param CreateOrUpdateMarkRequest $request
+     * @param integer $id
+     * @return JsonResponse
      */
-    public function update(CreateOrUpdateMarkRequest $request, int $id)
+    public function update(CreateOrUpdateMarkRequest $request, int $id): JsonResponse
     {
         try {
             $mark = $this->markRepository->find($id);
@@ -102,11 +115,5 @@ class MarkController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Mark $mark)
-    {
-        //
-    }
+
 }
