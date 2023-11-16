@@ -3,6 +3,7 @@
 namespace App\Http\Modules\Products\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Modules\Bases\PaginateBaseRequest;
 use App\Http\Modules\Products\Models\Product;
 use App\Http\Modules\Products\Repositories\ProductRepository;
 use App\Http\Modules\Products\Requests\CreateOrUpdateProductRequest;
@@ -21,12 +22,15 @@ class ProductController extends Controller
      *
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(PaginateBaseRequest $request): JsonResponse
     {
+        $limit = $request->get("limit", 10);
+        $search = $request->get("search", "");
+
         try {
             return response()->json([
                 'message' => 'ok',
-                'data' => $this->productRepository->list()
+                'data' => $this->productRepository->list($limit, $search)
             ], 200);
         } catch (\Throwable $e) {
             return response()->json([

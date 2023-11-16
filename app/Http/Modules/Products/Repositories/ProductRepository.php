@@ -18,14 +18,16 @@ class ProductRepository extends  RepositoryBase
      *
      * @return object
      */
-    public function list(): object
+    public function list(int $limit, string $search): object
     {
         return $this->productModel->select('id', 'name', 'price', 'category_id', 'mark_id')
+            ->where('name', 'like', '%' . $search . '%')
             ->with([
                 'category:id,name',
                 'mark:id,name',
             ])
-            ->get();
+
+            ->paginate($limit);
     }
 
     /**

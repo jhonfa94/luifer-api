@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::prefix('marks')->group(function () {
+Route::prefix('marks')->middleware('jwt.verify')->group(function () {
 
     Route::post('/create', [MarkController::class, 'store']);
     Route::get('/list', [MarkController::class, 'index']);

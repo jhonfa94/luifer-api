@@ -4,7 +4,7 @@ use App\Http\Modules\Products\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('products')->group(function () {
+Route::prefix('products')->middleware('jwt.verify')->group(function () {
 
     Route::post('/create', [ProductController::class, 'store']);
     Route::get('/list', [ProductController::class, 'index']);

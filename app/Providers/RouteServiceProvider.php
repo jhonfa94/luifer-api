@@ -33,6 +33,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(function(){
                     $this->loadRoutesFrom(base_path('routes/api.php'));
+                $this->loadRoutesFrom(base_path('routes/Auth/AuthRoutes.php'));
                     $this->loadRoutesFrom(base_path('routes/Categories/CategoryRoutes.php'));
                     $this->loadRoutesFrom(base_path('routes/Products/ProductRoutes.php'));
                     $this->loadRoutesFrom(base_path('routes/Marks/MarkRoutes.php'));

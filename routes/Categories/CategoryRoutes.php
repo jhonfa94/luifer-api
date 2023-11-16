@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::prefix('categories')->group(function(){
+Route::prefix('categories')->middleware('jwt.verify')->group(function () {
 
     Route::post('/create', [CategoryController::class,'store']);
     Route::get('/list', [CategoryController::class,'index']);

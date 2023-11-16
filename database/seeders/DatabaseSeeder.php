@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Http\Modules\Users\Models\User;
 use Database\Seeders\Category\CategorySeeder;
 use Database\Seeders\Mark\MarkSeeder;
 use Database\Seeders\Product\ProductSeeder;
@@ -18,10 +20,11 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory()->create([
+            'name' => 'Jhon Fabio Cardona',
+            'email' => 'correo@correo.com',
+            'password' => bcrypt('12345678'),
+        ]);
 
         $this->call([
             CategorySeeder::class,
